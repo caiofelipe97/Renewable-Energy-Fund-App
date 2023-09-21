@@ -1,8 +1,10 @@
 {
   "expo": {
     "name": "RenewableEnergyFundApp",
+    "displayName": "Renewable Energy Fund App",
     "slug": "RenewableEnergyFundApp",
     "version": "1.0.0",
+    "entryPoint": "./src/App.tsx",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
