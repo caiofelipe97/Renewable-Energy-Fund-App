@@ -9,6 +9,7 @@ import {
 import HomeScreen from '../screens/HomeScreen';
 import LoginScreen from '../screens/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen';
+import SignUpSuccessScreen from '../screens/SignUpSuccessScreen';
 
 type NavigationProps<T extends keyof RootStackParamList> = {
   navigation: StackNavigationProp<RootStackParamList, T>;
@@ -24,6 +25,7 @@ type RootStackParamList = {
   Home: undefined;
   Login: undefined;
   SignUp: undefined;
+  SignUpSuccess: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -40,6 +42,11 @@ const AppNavigator = () => {
       <Stack.Screen
         name="SignUp"
         component={SignUpScreen}
+        options={{ headerTitle: '' }}
+      />
+      <Stack.Screen
+        name="SignUpSuccess"
+        component={SignUpSuccessScreen}
         options={{ headerTitle: '' }}
       />
 

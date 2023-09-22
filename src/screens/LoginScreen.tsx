@@ -1,22 +1,47 @@
-import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { useState, useRef } from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  Alert,
+} from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import Icon from 'react-native-vector-icons/Feather';
 import { ScreenProps } from '../navigation/AppNavigator';
 import Input from '../components/Common/Input';
 import theme from '../theme';
-import Icon from 'react-native-vector-icons/Feather'; // Import the desired icon from FontAwesome
 import Button from '../components/Common/Button';
 import { percentageToPixels } from '../utils/percentageToPixels';
 
-type LoginScreenProps = ScreenProps<'Login'>;
+interface LoginScreenProps extends ScreenProps<'Login'> {}
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
 
+  const [loading, setLoading] = useState(false);
+
+  const emailInputRef = useRef<TextInput | null>(null);
+  const passwordInputRef = useRef<TextInput | null>(null);
+
   const handleLogin = () => {
-    if (email && password) navigation.navigate('Home');
+    if (!email) {
+      Alert.alert('Please enter an email address');
+      emailInputRef.current?.focus();
+      return;
+    }
+
+    if (!password) {
+      Alert.alert('Please enter a password');
+      passwordInputRef.current?.focus();
+      return;
+    }
+
+    setLoading(true);
+    navigation.navigate('Home');
   };
 
   const handleSignUpPress = () => {
@@ -32,11 +57,19 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       <Text style={styles.title}>Login</Text>
       <View style={styles.inputsContainer}>
         <Input
+          ref={emailInputRef}
           label="E-mail"
           placeholder="john@doe.com"
           onChangeText={text => setEmail(text)}
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            if (passwordInputRef.current) {
+              passwordInputRef.current.focus();
+            }
+          }}
         />
         <Input
+          ref={passwordInputRef}
           label="Password"
           placeholder="Minimum 8 characters"
           secureTextEntry={hidePassword}
@@ -53,10 +86,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
             </TouchableOpacity>
           }
           onChangeText={text => setPassword(text)}
+          returnKeyType="done"
         />
       </View>
       <View style={styles.actionsContainer}>
-        <Button onPress={handleLogin} title="Login" />
+        <Button onPress={handleLogin} title="Login" loading={loading} />
         <Text style={styles.infoText}>
           {'Don’t have an account? '}
 

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { ScreenProps } from '../navigation/AppNavigator';
 import theme from '../theme';
 
-type HomeScreenProps = ScreenProps<'Home'>;
+interface HomeScreenProps extends ScreenProps<'Home'> {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   return (

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, forwardRef } from 'react';
 import {
   View,
   Text,
@@ -9,22 +9,24 @@ import {
 import theme from '../../theme';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-type InputProps = TextInputProps & {
+interface InputProps extends TextInputProps {
   label: string;
   Icon?: ReactNode;
-};
+}
 
-const Input: React.FC<InputProps> = ({ label, Icon, ...props }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.input} {...props} />
-        {Icon}
+const Input = forwardRef<TextInput, InputProps>(
+  ({ label, Icon, ...props }, ref) => {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.label}>{label}</Text>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.input} {...props} ref={ref} />
+          {Icon}
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -55,4 +57,5 @@ const styles = StyleSheet.create({
   },
 });
 
+Input.displayName = 'Input';
 export default Input;

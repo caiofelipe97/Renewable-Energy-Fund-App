@@ -1,15 +1,22 @@
-import { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { useState, useRef } from 'react';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  Alert,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { ScreenProps } from '../navigation/AppNavigator';
 import Input from '../components/Common/Input';
 import theme from '../theme';
-import Icon from 'react-native-vector-icons/Feather'; // Import the desired icon from FontAwesome
 import Button from '../components/Common/Button';
 import Checkbox from '../components/Screens/SignUpScreen/Checkbox';
-import { RFValue } from 'react-native-responsive-fontsize';
 import { percentageToPixels } from '../utils/percentageToPixels';
 
-type SignUpScreenProps = ScreenProps<'SignUp'>;
+interface SignUpScreenProps extends ScreenProps<'SignUp'> {}
 
 const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const [firstName, setFirstName] = useState('');
@@ -20,12 +27,44 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
 
   const [hidePassword, setHidePassword] = useState(true);
 
+  const firstNameInputRef = useRef<TextInput | null>(null);
+  const lastNameInputRef = useRef<TextInput | null>(null);
+  const emailInputRef = useRef<TextInput | null>(null);
+  const passwordInputRef = useRef<TextInput | null>(null);
+
+  const [loading, setLoading] = useState(false);
+
   const handleHidePassword = () => {
     setHidePassword(currentValue => !currentValue);
   };
 
   const handleCreateAccount = () => {
-    if (email && password) navigation.navigate('Home');
+    if (!firstName) {
+      Alert.alert('Please enter your first name');
+      firstNameInputRef.current?.focus();
+      return;
+    }
+
+    if (!lastName) {
+      Alert.alert('Please enter your last name');
+      lastNameInputRef.current?.focus();
+      return;
+    }
+
+    if (!email) {
+      Alert.alert('Please enter an email address');
+      emailInputRef.current?.focus();
+      return;
+    }
+
+    if (!password) {
+      Alert.alert('Please enter a password');
+      passwordInputRef.current?.focus();
+      return;
+    }
+
+    setLoading(true);
+    navigation.navigate('SignUpSuccess');
   };
 
   const handleGoToLogin = () => {
@@ -44,16 +83,36 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
           label="First Name"
           placeholder="John"
           onChangeText={text => setFirstName(text)}
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            if (lastNameInputRef.current) {
+              lastNameInputRef.current.focus();
+            }
+          }}
         />
         <Input
+          ref={lastNameInputRef}
           label="Last Name"
           placeholder="Doe"
           onChangeText={text => setLastName(text)}
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            if (emailInputRef.current) {
+              emailInputRef.current.focus();
+            }
+          }}
         />
         <Input
+          ref={emailInputRef}
           label="E-mail"
           placeholder="john@doe.com"
           onChangeText={text => setEmail(text)}
+          returnKeyType="next"
+          onSubmitEditing={() => {
+            if (passwordInputRef.current) {
+              passwordInputRef.current.focus();
+            }
+          }}
         />
         <Input
           label="Password"
@@ -72,6 +131,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
             </TouchableOpacity>
           }
           onChangeText={text => setPassword(text)}
+          returnKeyType="done"
         />
         <Checkbox
           isChecked={agreeWithTerms}
@@ -86,7 +146,11 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={styles.actionsContainer}>
-        <Button onPress={handleCreateAccount} title="Create account" />
+        <Button
+          onPress={handleCreateAccount}
+          title="Create account"
+          disabled={loading}
+        />
         <Text style={styles.infoText}>
           Already have an account?{' '}
           <Text style={styles.touchableText} onPress={handleGoToLogin}>
