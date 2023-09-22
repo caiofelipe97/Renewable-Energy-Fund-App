@@ -23,7 +23,7 @@ export type ScreenProps<T extends keyof RootStackParamList> =
 type RootStackParamList = {
   Home: undefined;
   Login: undefined;
-  Signup: undefined;
+  SignUp: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -37,7 +37,11 @@ const AppNavigator = () => {
         component={LoginScreen}
         options={{ headerTitle: '' }}
       />
-      <Stack.Screen name="Signup" component={SignUpScreen} />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUpScreen}
+        options={{ headerTitle: '' }}
+      />
 
       {/* Authenticated Screens */}
       <Stack.Screen name="Home" component={HomeScreen} />

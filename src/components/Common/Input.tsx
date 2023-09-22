@@ -7,6 +7,7 @@ import {
   TextInputProps,
 } from 'react-native';
 import theme from '../../theme';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 type InputProps = TextInputProps & {
   label: string;
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: theme.colors.grey700,
-    fontSize: 11,
+    fontSize: RFValue(11),
     fontFamily: theme.fonts.medium,
   },
   inputContainer: {
@@ -41,6 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: theme.colors.grey100,
     paddingHorizontal: 10,
+    borderRadius: 4,
   },
   input: {
     color: theme.colors.black,
@@ -48,7 +50,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 15,
     fontFamily: theme.fonts.regular,
-    fontSize: 14,
+    fontSize: RFValue(14),
     flex: 1,
   },
 });

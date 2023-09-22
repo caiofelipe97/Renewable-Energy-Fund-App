@@ -5,6 +5,7 @@ import {
   Text,
 } from 'react-native';
 import theme from '../../theme';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 type ButtonProps = TouchableOpacityProps & { title: string };
 
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: theme.colors.white,
-    fontSize: 16,
+    fontSize: RFValue(16),
     fontFamily: theme.fonts.regular,
   },
 });

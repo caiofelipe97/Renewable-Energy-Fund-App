@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { RFValue } from 'react-native-responsive-fontsize';
 import { ScreenProps } from '../navigation/AppNavigator';
 import Input from '../components/Common/Input';
 import theme from '../theme';
 import Icon from 'react-native-vector-icons/Feather'; // Import the desired icon from FontAwesome
 import Button from '../components/Common/Button';
+import { percentageToPixels } from '../utils/percentageToPixels';
 
 type LoginScreenProps = ScreenProps<'Login'>;
 
@@ -18,7 +20,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   };
 
   const handleSignUpPress = () => {
-    navigation.navigate('Signup');
+    navigation.navigate('SignUp');
   };
 
   const handleHidePassword = () => {
@@ -73,12 +75,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: theme.colors.white,
-    padding: 20,
-    gap: 34,
+    paddingVertical: percentageToPixels(5),
+    paddingHorizontal: '5.3%',
+    gap: percentageToPixels(4, 'height'),
   },
   title: {
     fontFamily: theme.fonts.semiBold,
-    fontSize: 18,
+    fontSize: RFValue(18),
   },
   inputsContainer: {
     width: '100%',
@@ -96,11 +99,11 @@ const styles = StyleSheet.create({
   infoText: {
     fontFamily: theme.fonts.regular,
     color: theme.colors.grey700,
-    fontSize: 12,
+    fontSize: RFValue(12),
   },
   touchableText: {
     color: theme.colors.grey700,
-    fontSize: 12,
+    fontSize: RFValue(12),
     textDecorationLine: 'underline',
   },
 });
