@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { ScreenProps } from '../navigation/AppNavigator';
+import theme from '../theme';
 
 type HomeScreenProps = ScreenProps<'Home'>;
 
@@ -16,6 +17,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: theme.colors.white,
   },
 });
 

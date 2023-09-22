@@ -32,7 +32,11 @@ const AppNavigator = () => {
   return (
     <Stack.Navigator>
       {/* Unauthenticated Screens */}
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerTitle: '' }}
+      />
       <Stack.Screen name="Signup" component={SignUpScreen} />
 
       {/* Authenticated Screens */}
