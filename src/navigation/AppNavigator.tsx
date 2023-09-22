@@ -1,15 +1,14 @@
 import React from 'react';
-import { RouteProp } from '@react-navigation/native';
-import {
-  StackNavigationProp,
-  createStackNavigator,
-} from '@react-navigation/stack';
-
-// Import your screens
-import HomeScreen from '../screens/HomeScreen';
-import LoginScreen from '../screens/LoginScreen';
-import SignUpScreen from '../screens/SignUpScreen';
-import SignUpSuccessScreen from '../screens/SignUpSuccessScreen';
+import { useSelector } from 'react-redux';
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { selectIsAuthenticated } from '../features/auth/authSelectors';
+import AuthenticatedStackScreen, {
+  AuthenticatedStackParamList,
+} from './AuthenticatedStack';
+import UnauthenticatedStackScreen, {
+  UnauthenticatedStackParamList,
+} from './UnauthenticatedStack';
 
 type NavigationProps<T extends keyof RootStackParamList> = {
   navigation: StackNavigationProp<RootStackParamList, T>;
@@ -21,38 +20,19 @@ type RouteProps<T extends keyof RootStackParamList> = {
 export type ScreenProps<T extends keyof RootStackParamList> =
   NavigationProps<T> & RouteProps<T>;
 
-type RootStackParamList = {
-  Home: undefined;
-  Login: undefined;
-  SignUp: undefined;
-  SignUpSuccess: undefined;
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
+type RootStackParamList = AuthenticatedStackParamList &
+  UnauthenticatedStackParamList;
 
 const AppNavigator = () => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   return (
-    <Stack.Navigator>
-      {/* Unauthenticated Screens */}
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-        options={{ headerTitle: '' }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUpScreen}
-        options={{ headerTitle: '' }}
-      />
-      <Stack.Screen
-        name="SignUpSuccess"
-        component={SignUpSuccessScreen}
-        options={{ headerTitle: '' }}
-      />
-
-      {/* Authenticated Screens */}
-      <Stack.Screen name="Home" component={HomeScreen} />
-    </Stack.Navigator>
+    <NavigationContainer>
+      {isAuthenticated ? (
+        <AuthenticatedStackScreen />
+      ) : (
+        <UnauthenticatedStackScreen />
+      )}
+    </NavigationContainer>
   );
 };
 

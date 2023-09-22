@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { registerRootComponent } from 'expo';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import store from './store';
 import AppNavigator from './navigation/AppNavigator';
 import Loading from './components/Common/Loading';
 
@@ -47,9 +48,9 @@ function App() {
   }
 
   return (
-    <NavigationContainer>
+    <Provider store={store}>
       <AppNavigator />
-    </NavigationContainer>
+    </Provider>
   );
 }
 

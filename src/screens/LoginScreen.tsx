@@ -6,14 +6,20 @@ import {
   Text,
   TextInput,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Icon from 'react-native-vector-icons/Feather';
+import { useDispatch } from 'react-redux';
 import { ScreenProps } from '../navigation/AppNavigator';
 import Input from '../components/Common/Input';
 import theme from '../theme';
 import Button from '../components/Common/Button';
 import { percentageToPixels } from '../utils/percentageToPixels';
+import { login } from '../features/auth/authActions';
+import { AppDispatch } from '../store';
+import { selectLoading } from '../features/auth/authSelectors';
 
 interface LoginScreenProps extends ScreenProps<'Login'> {}
 
@@ -22,10 +28,12 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
 
-  const [loading, setLoading] = useState(false);
-
   const emailInputRef = useRef<TextInput | null>(null);
   const passwordInputRef = useRef<TextInput | null>(null);
+
+  const loading = useSelector(selectLoading);
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const handleLogin = () => {
     if (!email) {
@@ -40,8 +48,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       return;
     }
 
-    setLoading(true);
-    navigation.navigate('Home');
+    dispatch(login({ email, password }));
   };
 
   const handleSignUpPress = () => {
@@ -90,7 +97,11 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={styles.actionsContainer}>
-        <Button onPress={handleLogin} title="Login" loading={loading} />
+        {loading ? (
+          <ActivityIndicator size="large" color={theme.colors.primary} />
+        ) : (
+          <Button onPress={handleLogin} title="Login" />
+        )}
         <Text style={styles.infoText}>
           {'Don’t have an account? '}
 

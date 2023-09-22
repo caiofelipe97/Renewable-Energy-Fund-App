@@ -32,8 +32,6 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
   const emailInputRef = useRef<TextInput | null>(null);
   const passwordInputRef = useRef<TextInput | null>(null);
 
-  const [loading, setLoading] = useState(false);
-
   const handleHidePassword = () => {
     setHidePassword(currentValue => !currentValue);
   };
@@ -63,8 +61,15 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
       return;
     }
 
-    setLoading(true);
-    navigation.navigate('SignUpSuccess');
+    if (!agreeWithTerms) {
+      Alert.alert('You need agree to the Terms of Service and Privacy policy');
+      return;
+    }
+    Alert.alert(
+      'Account successfully created',
+      'You can now login into your account',
+    );
+    navigation.navigate('Login');
   };
 
   const handleGoToLogin = () => {
@@ -80,6 +85,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
       <Text style={styles.title}>Create your account</Text>
       <View style={styles.inputsContainer}>
         <Input
+          ref={firstNameInputRef}
           label="First Name"
           placeholder="John"
           onChangeText={text => setFirstName(text)}
@@ -115,6 +121,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
           }}
         />
         <Input
+          ref={passwordInputRef}
           label="Password"
           placeholder="Minimum 8 characters"
           secureTextEntry={hidePassword}
@@ -146,11 +153,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={styles.actionsContainer}>
-        <Button
-          onPress={handleCreateAccount}
-          title="Create account"
-          disabled={loading}
-        />
+        <Button onPress={handleCreateAccount} title="Create account" />
         <Text style={styles.infoText}>
           Already have an account?{' '}
           <Text style={styles.touchableText} onPress={handleGoToLogin}>

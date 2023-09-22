@@ -9,20 +9,11 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
-  loading?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({
-  title,
-  loading = false,
-  ...props
-}) => {
+const Button: React.FC<ButtonProps> = ({ title, ...props }) => {
   return (
-    <TouchableOpacity
-      style={styles.buttonContainer}
-      {...props}
-      disabled={loading}
-    >
+    <TouchableOpacity style={styles.buttonContainer} {...props}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
   );
