@@ -5,6 +5,7 @@ import {
   StatusBar,
   TouchableOpacity,
   Text,
+  Platform,
 } from 'react-native';
 import Icon from '@expo/vector-icons/Feather';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
@@ -28,6 +29,8 @@ const AssetDetailsHeader: React.FC = () => {
         backgroundColor={theme.colors.white}
         barStyle={'dark-content'}
       />
+      <View style={styles.statusBarBackground} />
+
       <View style={styles.container}>
         <TouchableOpacity style={styles.column} onPress={handleGoBack}>
           <Icon name="arrow-left" size={24} color={theme.colors.black} />
@@ -52,6 +55,10 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.white,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.grey100,
+  },
+  statusBarBackground: {
+    height: Platform.OS === 'ios' ? 40 : 0,
+    backgroundColor: theme.colors.white,
   },
   column: { flex: 1 },
   titleContainer: {

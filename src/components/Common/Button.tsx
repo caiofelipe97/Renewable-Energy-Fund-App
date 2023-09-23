@@ -4,6 +4,7 @@ import {
   TouchableOpacityProps,
   StyleSheet,
   Text,
+  ViewStyle,
 } from 'react-native';
 import theme from '../../theme';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -11,9 +12,15 @@ import { RFValue } from 'react-native-responsive-fontsize';
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
   variant: 'primary' | 'secondary' | 'outlined';
+  style?: ViewStyle;
 }
 
-const Button: React.FC<ButtonProps> = ({ title, variant, ...props }) => {
+const Button: React.FC<ButtonProps> = ({
+  title,
+  variant,
+  style = {},
+  ...props
+}) => {
   const buttonStyle = useMemo(() => {
     let backgroundColor;
     let borderWidth = 0;
@@ -27,10 +34,11 @@ const Button: React.FC<ButtonProps> = ({ title, variant, ...props }) => {
     }
     return {
       ...styles.buttonContainer,
+      ...style,
       backgroundColor,
       borderWidth,
     };
-  }, [variant]);
+  }, [style, variant]);
 
   const textStyle = useMemo(() => {
     let color;
@@ -51,7 +59,7 @@ const Button: React.FC<ButtonProps> = ({ title, variant, ...props }) => {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flex: 1,
+    width: '100%',
     padding: 16,
     borderRadius: 4,
     alignItems: 'center',

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   bannerInfoContainer: {
     flexDirection: 'column',
     gap: percentageToPixels(2.65),
-    maxWidth: percentageToPixels(42),
+    maxWidth: percentageToPixels(50),
   },
   title: {
     fontSize: RFValue(16),

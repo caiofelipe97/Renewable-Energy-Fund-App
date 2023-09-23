@@ -24,8 +24,12 @@ const ManageAsset: React.FC = () => {
         <Text style={styles.lastPurchase}>Last purchase 28d ago</Text>
       </View>
       <View style={styles.actionButtonsContainer}>
-        <Button title="Sell" variant="outlined" />
-        <Button title="Retire credits" variant="secondary" />
+        <Button title="Sell" variant="outlined" style={styles.actionButton} />
+        <Button
+          title="Retire credits"
+          variant="secondary"
+          style={styles.actionButton}
+        />
       </View>
       <Text style={styles.previousInfo}>
         You’ve previously retired 28 credits of this asset
@@ -96,6 +100,9 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.regular,
     fontSize: RFValue(12),
     color: theme.colors.grey700,
+  },
+  actionButton: {
+    width: '48%',
   },
 });
 

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import Icon from '@expo/vector-icons/Feather';
 import { useSelector } from 'react-redux';
@@ -25,6 +26,7 @@ function HomeHeader() {
         barStyle={'dark-content'}
       />
       <View style={styles.container}>
+        <View style={styles.statusBarBackground} />
         <View style={styles.header}>
           <TouchableOpacity style={styles.profileButton}>
             <Icon name="user" size={24} color={theme.colors.black} />
@@ -66,6 +68,10 @@ const styles = StyleSheet.create({
     gap: 16,
     borderBottomWidth: 1,
     borderBottomColor: theme.colors.grey100,
+  },
+  statusBarBackground: {
+    height: Platform.OS === 'ios' ? 40 : 0,
+    backgroundColor: theme.colors.white,
   },
   header: {
     flexDirection: 'row',

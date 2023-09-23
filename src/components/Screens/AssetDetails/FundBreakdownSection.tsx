@@ -110,6 +110,7 @@ const FundBreakdownSection: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     gap: percentageToPixels(1.6),
+    marginBottom: theme.padding.default,
   },
   title: {
     fontFamily: theme.fonts.semiBold,
@@ -139,6 +140,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: theme.padding.default,
     flexDirection: 'row',
     gap: theme.padding.default,
+    marginTop: 10,
   },
   tabTitle: {
     fontFamily: theme.fonts.semiBold,

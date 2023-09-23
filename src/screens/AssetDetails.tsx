@@ -17,7 +17,7 @@ const AssetDetails: React.FC<AssetDetailsProps> = () => {
   const { asset } = route.params;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container} bounces={false}>
       <AssetChart asset={asset} />
       <AsssetInfo />
       <FundBreakdownSection />

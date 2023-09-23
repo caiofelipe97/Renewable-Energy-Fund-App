@@ -10,7 +10,7 @@ interface HomeScreenProps extends ScreenProps<'HomeScreen'> {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView contentContainerStyle={styles.container} bounces={false}>
       <Text style={styles.title}>Funds</Text>
       <FundList />
       <View style={styles.content}>
