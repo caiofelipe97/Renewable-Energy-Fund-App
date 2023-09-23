@@ -1,3 +1,5 @@
+import { percentageToPixels } from './utils/percentageToPixels';
+
 const theme = {
   colors: {
     primary: '#770FDF',
@@ -18,6 +20,9 @@ const theme = {
     regular: 'Sora-Regular',
     medium: 'Sora-Medium',
     semiBold: 'Sora-SemiBold',
+  },
+  padding: {
+    default: percentageToPixels(5.3),
   },
 };
 

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { RFValue } from 'react-native-responsive-fontsize';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from '@expo/vector-icons/Feather';
 import { useDispatch } from 'react-redux';
 import { ScreenProps } from '../navigation/AppNavigator';
 import Input from '../components/Common/Input';

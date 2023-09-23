@@ -7,7 +7,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from '@expo/vector-icons/Feather';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ScreenProps } from '../navigation/AppNavigator';
 import Input from '../components/Common/Input';

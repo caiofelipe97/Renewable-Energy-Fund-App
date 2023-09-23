@@ -7,9 +7,15 @@ export interface AuthState {
   loading: boolean;
 }
 
+const initialState = {
+  isAuthenticated: false,
+  error: null,
+  loading: false,
+} as AuthState;
+
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { isAuthenticated: false, error: null } as AuthState,
+  initialState,
   reducers: {},
   extraReducers: builder => {
     builder
