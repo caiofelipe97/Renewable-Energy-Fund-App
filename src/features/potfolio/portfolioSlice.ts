@@ -15,21 +15,33 @@ const initialState = {
   assets: [
     {
       name: 'Wind Fund',
+      abbreviation: 'WFND',
       type: AssetType.InvestmentFund,
       value: 1032.23,
-      variation: 3.51,
+      variation: {
+        percentage: 3.51,
+        value: 1.21,
+      },
     },
     {
       name: 'Solar Fund',
+      abbreviation: 'SFND',
       type: AssetType.InvestmentFund,
+      variation: {
+        percentage: -0.13,
+        value: 0.08,
+      },
       value: 986.61,
-      variation: -0.13,
     },
     {
       name: 'Natural Fund',
+      abbreviation: 'NFND',
       type: AssetType.InvestmentFund,
       value: 1122.52,
-      variation: 5.21,
+      variation: {
+        percentage: 5.21,
+        value: 1.98,
+      },
     },
   ],
 } as PotfolioState;

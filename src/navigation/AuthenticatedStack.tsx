@@ -1,20 +1,18 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from '@expo/vector-icons/Feather';
 
-import HomeScreen from '../screens/HomeScreen';
-import HomeHeader from '../components/Screens/Home/HomeHeader';
 import TradeScreen from '../screens/TradeScreen';
 import PortfolioScreen from '../screens/PortfolioScreen';
 import theme from '../theme';
+import HomeStackNavigator from './stacks/HomeStackNavigator';
 
-export type AuthenticatedStackParamList = {
+export type TabParamList = {
   Home: undefined;
   Trade: undefined;
   Potfolio: undefined;
 };
 
-const AuthenticatedTab =
-  createBottomTabNavigator<AuthenticatedStackParamList>();
+const AuthenticatedTab = createBottomTabNavigator<TabParamList>();
 
 function AuthenticatedStackScreen() {
   return (
@@ -26,9 +24,9 @@ function AuthenticatedStackScreen() {
     >
       <AuthenticatedTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStackNavigator}
         options={{
-          header: () => <HomeHeader />,
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name={'home'} size={size} color={color} />
           ),

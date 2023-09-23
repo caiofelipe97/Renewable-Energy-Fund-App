@@ -13,6 +13,7 @@ import theme from '../../../theme';
 import { selectPotfolio } from '../../../features/potfolio/portfolioSelectors';
 import Variation from '../../Common/Variation';
 import CoinIcon from '../../Common/Icons/CoinIcon';
+import TextButton from '../../Common/TextButton';
 
 function HomeHeader() {
   const { accountBalance, value, variation } = useSelector(selectPotfolio);
@@ -43,13 +44,13 @@ function HomeHeader() {
             <Text style={styles.portfolio}>Portfolio</Text>
             <View style={styles.portfolioValueContainer}>
               <Text style={styles.portfolioValueText}>{value}</Text>
-              <Variation variation={variation} />
+              <Variation percentage={variation} />
             </View>
           </View>
-          <TouchableOpacity style={styles.earnRewardsButton}>
+          <TextButton>
             <CoinIcon />
             <Text style={styles.earnRewardsText}>Earn Rewards</Text>
-          </TouchableOpacity>
+          </TextButton>
         </View>
       </View>
     </>
@@ -96,21 +97,13 @@ const styles = StyleSheet.create({
   },
   portfolioValueContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
   },
   portfolioValueText: {
     fontFamily: theme.fonts.semiBold,
     fontSize: RFValue(24),
   },
-  earnRewardsButton: {
-    paddingHorizontal: 9,
-    paddingVertical: 8,
-    backgroundColor: theme.colors.primaryLight,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    borderRadius: 4,
-  },
+
   earnRewardsText: {
     fontFamily: theme.fonts.semiBold,
     fontSize: RFValue(11),

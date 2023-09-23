@@ -5,11 +5,12 @@ import Icon from '@expo/vector-icons/Feather';
 import theme from '../../theme';
 
 interface VariationProps {
-  variation: number;
+  percentage: number;
+  value?: number;
 }
 
-const Variation: React.FC<VariationProps> = ({ variation }) => {
-  const textColor = variation < 0 ? theme.colors.red : theme.colors.green;
+const Variation: React.FC<VariationProps> = ({ percentage, value }) => {
+  const textColor = percentage < 0 ? theme.colors.red : theme.colors.green;
 
   const variationStyle = {
     color: textColor,
@@ -17,12 +18,13 @@ const Variation: React.FC<VariationProps> = ({ variation }) => {
   };
 
   const variationIconName =
-    variation < 0 ? 'arrow-down-right' : 'arrow-up-right';
+    percentage < 0 ? 'arrow-down-right' : 'arrow-up-right';
 
   return (
     <View style={styles.variationContainer}>
       <Icon name={variationIconName} size={14} color={textColor} />
-      <Text style={variationStyle}>{Math.abs(variation)}%</Text>
+      <Text style={variationStyle}>{Math.abs(percentage)}%</Text>
+      {value && <Text style={variationStyle}>(${value})</Text>}
     </View>
   );
 };

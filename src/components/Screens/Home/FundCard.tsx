@@ -1,31 +1,43 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
 import theme from '../../../theme';
 import { Asset } from '../../../types/Asset';
 import AssetIcon from '../../Common/AssetIcon';
 import { percentageToPixels } from '../../../utils/percentageToPixels';
 import Chart from '../../Common/Chart';
 import Variation from '../../Common/Variation';
+import { RootStackParamList } from '../../../navigation/AppNavigator';
 
 interface FundCardProps {
   fund: Asset;
 }
 
 const FundCard: React.FC<FundCardProps> = ({ fund }) => {
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+
+  const handleNavigateToAssetDetails = () => {
+    navigation.navigate('AssetDetails', { asset: fund });
+  };
+
   return (
-    <View style={styles.fundContainer}>
+    <TouchableOpacity
+      style={styles.fundContainer}
+      onPress={handleNavigateToAssetDetails}
+    >
       <View style={styles.fundCardHeader}>
         <AssetIcon name={fund.name} />
         <Text style={styles.fundName}>{fund.name}</Text>
       </View>
 
-      <Chart variation={fund.variation} />
+      <Chart variation={fund.variation.percentage} />
       <View style={styles.fundDataContainer}>
         <Text style={styles.fundValueText}>{fund.value}</Text>
-        <Variation variation={fund.variation} />
+        <Variation percentage={fund.variation.percentage} />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

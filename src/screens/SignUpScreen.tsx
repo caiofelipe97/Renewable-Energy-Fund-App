@@ -153,7 +153,7 @@ const SignUpScreen: React.FC<SignUpScreenProps> = ({ navigation }) => {
         />
       </View>
       <View style={styles.actionsContainer}>
-        <Button onPress={handleCreateAccount} title="Create account" />
+        <Button onPress={handleCreateAccount} title="Create account" variant="primary"/>
         <Text style={styles.infoText}>
           Already have an account?{' '}
           <Text style={styles.touchableText} onPress={handleGoToLogin}>

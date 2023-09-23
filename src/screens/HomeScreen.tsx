@@ -6,7 +6,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { percentageToPixels } from '../utils/percentageToPixels';
 import LearnMoreBanner from '../components/Screens/Home/LearnMoreBanner';
 
-interface HomeScreenProps extends ScreenProps<'Home'> {}
+interface HomeScreenProps extends ScreenProps<'HomeScreen'> {}
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   return (
@@ -28,7 +28,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: theme.colors.white,
     paddingVertical: theme.padding.default,
     gap: percentageToPixels(2.5, 'height'),

@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import { NavigationContainer, RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { selectIsAuthenticated } from '../features/auth/authSelectors';
-import AuthenticatedStackScreen, {
-  AuthenticatedStackParamList,
-} from './AuthenticatedStack';
+import AuthenticatedStackScreen, { TabParamList } from './AuthenticatedStack';
 import UnauthenticatedStackScreen, {
   UnauthenticatedStackParamList,
 } from './UnauthenticatedStack';
+import { HomeStackParamList } from './stacks/HomeStackNavigator';
 
 type NavigationProps<T extends keyof RootStackParamList> = {
   navigation: StackNavigationProp<RootStackParamList, T>;
@@ -20,7 +19,8 @@ type RouteProps<T extends keyof RootStackParamList> = {
 export type ScreenProps<T extends keyof RootStackParamList> =
   NavigationProps<T> & RouteProps<T>;
 
-type RootStackParamList = AuthenticatedStackParamList &
+export type RootStackParamList = TabParamList &
+  HomeStackParamList &
   UnauthenticatedStackParamList;
 
 const AppNavigator = () => {

@@ -10,7 +10,11 @@ export enum AssetType {
 
 export type Asset = {
   name: InvestmentFund;
+  abbreviation: string;
   type: AssetType;
   value: number;
-  variation: number;
+  variation: {
+    percentage: number;
+    value: number;
+  };
 };

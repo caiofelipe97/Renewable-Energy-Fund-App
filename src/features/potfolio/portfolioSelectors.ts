@@ -7,8 +7,3 @@ export const selectPotfolio = (state: RootState) => state.potfolio;
 export const selectFunds = createSelector(selectPotfolio, portfolio =>
   portfolio.assets.filter(asset => asset.type === AssetType.InvestmentFund),
 );
-
-export const selectAccountBalance = createSelector(
-  selectPotfolio,
-  portfolio => portfolio.accountBalance,
-);

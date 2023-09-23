@@ -100,7 +100,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         {loading ? (
           <ActivityIndicator size="large" color={theme.colors.primary} />
         ) : (
-          <Button onPress={handleLogin} title="Login" />
+          <Button onPress={handleLogin} title="Login" variant="primary" />
         )}
         <Text style={styles.infoText}>
           {'Don’t have an account? '}
